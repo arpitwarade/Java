@@ -1,0 +1,63 @@
+package Datevalid;
+
+public class Day3 {
+
+	public static void main(String[] args) {
+		Date dateObj=new Date();
+		
+		System.out.println("Enter Day: ");
+		int day=ConsoleInput.getInt();
+		
+		System.out.println("Enter Month: ");
+		int month=ConsoleInput.getInt();
+		
+		System.out.println("Enter Year: ");
+		int year=ConsoleInput.getInt();
+		
+
+		int choice;
+		do {
+			System.out.println("-----Menu-----");
+			System.out.println("1. set Date: ");
+			System.out.println("2. Add Date: ");
+			System.out.println("3. Add Months: ");
+			System.out.println("4. Add Years: ");
+			System.out.println("5. Compare Date: ");
+			System.out.println("6. Exit: ");
+			System.out.println("Enter Your Choice: ");
+			choice=ConsoleInput.getInt();
+			
+			switch(choice) {
+				case 1:
+					dateObj.setDate(day,month,year);
+					System.out.println("Date= "+dateObj.getDay()+"/"+dateObj.getMonth()+"/"+dateObj.getYear());
+					break;
+				case 2:
+					System.out.println("Enter the days you want to add: ");
+					int addday=ConsoleInput.getInt();
+					dateObj.addDay(addday);
+					System.out.println("Date= "+dateObj.getDay()+"/"+dateObj.getMonth()+"/"+dateObj.getYear());
+					break;
+				case 3:
+   			    	System.out.println("Enter the Month you want to Add: ");
+					int addmonth=ConsoleInput.getInt();
+					dateObj.addMonth(addmonth);
+					System.out.println("Date= "+dateObj.getDay()+"/"+dateObj.getMonth()+"/"+dateObj.getYear());
+					break;
+				case 4:
+       				System.out.println("Enter the Month you want to Add: ");
+					int addyear=ConsoleInput.getInt();
+					dateObj.addYear(addyear);
+					System.out.println("Date= "+dateObj.getDay()+"/"+dateObj.getMonth()+"/"+dateObj.getYear());
+					break;
+				case 5:
+    				dateObj.setDate(day,month,year);
+					break;
+				default:
+					break;
+			}
+			
+		}while(choice!=6);
+	}
+
+}

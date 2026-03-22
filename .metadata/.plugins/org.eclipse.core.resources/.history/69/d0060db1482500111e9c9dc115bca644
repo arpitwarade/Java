@@ -1,0 +1,143 @@
+package Datevalid;
+
+public class Date {
+	int day,month,year;
+	
+	public boolean isLeapYear(){
+		if(year%4==0 && year%100!=0) {
+			return true;
+		}
+		else if(year%100==0 && year%400==0)
+		{
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public void setDate(int day,int month,int year) {
+		
+		if(year>3100 || year<1970) {
+			this.year=2026;
+		}
+		else {
+			this.year=year;
+		}
+		
+		if(month>12 || month <0) {
+			this.month=1;
+		}
+		else {
+			this.month=month;
+		}
+		
+		if(month==1 || month==3 || month==5 || month==7 || month==8 || month==10 || month==12)
+		{
+			if(day<1 || day>31) {
+				this.day=1;
+			}
+			else {
+				this.day=day;
+			}
+		}
+		else if(month==4 || month==6 || month==9 || month==11 ) {
+			if(day<1 || day>30) {
+				this.day=1;
+			}
+			else {
+				this.day=day;
+			}
+		}
+		else{
+			if(isLeapYear()) {
+				if(day<1 || day>29) {
+					this.day=1;
+				}
+				else {
+					this.day=day;
+				}
+			}
+			else {
+				if(day<1 || day>28) {
+					this.day=1;
+				}
+				else {
+					this.day=day;
+				}
+			}
+		}
+		
+	}
+	
+	public int getDay() {
+		return day;
+	}
+
+	public int getMonth() {
+		return month;
+	}
+
+	public int getYear() {
+		return year;
+	}
+	
+	public void addDay(int adddays,int month,int year) {
+		int totaldays=adddays+day;
+		while(totaldays!=0) {
+			if(month==1 || month==3 || month==5 || month==7 || month==8 || month==10 || month==12)
+			{
+				if(totaldays>31) {
+					totaldays-=31;
+					day=1;
+					this.month++;
+				}
+				else {
+					day=totaldays;
+					totaldays=0;
+				}
+			}
+			else if(month==4 || month==6 || month==9 || month==11 ) {
+				if(totaldays>30) {
+					totaldays-=30;
+					this.day=1;
+					this.month++;
+				}
+				else {
+					this.day=totaldays;
+					totaldays=0;
+				}
+			}
+			else{
+				if(isLeapYear()) {
+					if(totaldays>29) {
+						totaldays-=29;
+						this.day=1;
+						this.month++;
+					}
+					else {
+						this.day=totaldays;
+						totaldays=0;
+					}
+				}
+				else {
+					if(totaldays>28) {
+						totaldays-=28;
+						this.day=1;
+						this.month++;
+					}
+					else {
+						this.day=totaldays;
+						totaldays=0;
+					}
+				}
+			}
+			if(month>12) {
+				this.year++;
+				this.month=1;
+			}
+		}
+	}
+
+}
+

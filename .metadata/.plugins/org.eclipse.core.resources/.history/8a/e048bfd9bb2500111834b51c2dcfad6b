@@ -1,0 +1,216 @@
+package Datevalid;
+
+public class Date {
+	int day,month,year;
+	
+	public boolean isLeapYear(){
+		if(year%4==0 && year%100!=0) {
+			return true;
+		}
+		else if(year%100==0 && year%400==0)
+		{
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public void setDate(int day,int month,int year) {
+		
+		if(year>3100 || year<1970) {
+			this.year=2026;
+		}
+		else {
+			this.year=year;
+		}
+		
+		if(month>12 || month <0) {
+			this.month=1;
+		}
+		else {
+			this.month=month;
+		}
+		
+		if(month==1 || month==3 || month==5 || month==7 || month==8 || month==10 || month==12)
+		{
+			if(day<1 || day>31) {
+				this.day=1;
+			}
+			else {
+				this.day=day;
+			}
+		}
+		else if(month==4 || month==6 || month==9 || month==11 ) {
+			if(day<1 || day>30) {
+				this.day=1;
+			}
+			else {
+				this.day=day;
+			}
+		}
+		else{
+			if(isLeapYear()) {
+				if(day<1 || day>29) {
+					this.day=1;
+				}
+				else {
+					this.day=day;
+				}
+			}
+			else {
+				if(day<1 || day>28) {
+					this.day=1;
+				}
+				else {
+					this.day=day;
+				}
+			}
+		}
+		
+	}
+	
+	public int getDay() {
+		return day;
+	}
+
+	public int getMonth() {
+		return month;
+	}
+
+	public int getYear() {
+		return year;
+	}
+	
+	int countdays=0;
+	int countmonths =1;
+	int countyear=year;
+	
+	public boolean isLeapYearAdd(){
+		if(countyear%4==0 && countyear%100!=0) {
+			return true;
+		}
+		else if(countyear%100==0 && countyear%400==0)
+		{
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public void addDay(int adddays) {
+		
+		countdays +=  adddays;
+		
+		if(isLeapYear()){
+			for(int i =1; i<=month;i++) {
+				if(month==1 || month==3 || month==5 || month==7 || month==8 || month==10 || month==12) {
+					if(day>1 || day<31) {
+						countdays +=day;
+					}
+					else {
+						countdays +=31;
+					}
+				}
+				else if(month==4 || month==6 || month==9 || month==11) {
+					if(day>1 || day<30) {
+						countdays += day;
+					}
+					else {
+						countdays +=30;
+					}
+				}
+				else {
+					if(day>1 || day<29) {
+						countdays += day;
+					}
+					else {
+						countdays +=29;
+					}
+				}
+			}
+		}
+		
+		if(!isLeapYear()){
+			for(int i =1; i<=month;i++) {
+				if(month==1 || month==3 || month==5 || month==7 || month==8 || month==10 || month==12) {
+					if(day>1 || day<31) {
+						countdays +=day;
+					}
+					else {
+						countdays +=31;
+					}
+				}
+				else if(month==4 || month==6 || month==9 || month==11) {
+					if(day>1 || day<30) {
+						countdays += day;
+					}
+					else {
+						countdays +=30;
+					}
+				}
+				else {
+					if(day>1 || day<28) {
+						countdays += day;
+					}
+					else {
+						countdays +=28;
+					}
+				}
+			}
+		}
+		
+		while(countdays !=0) {
+			if(isLeapYearAdd()) {
+				
+				if(countmonths==1 || countmonths==3 || countmonths==5 || countmonths==7 || countmonths==8 || countmonths==10) {
+					if(countdays>31) {
+						countdays -=31;
+						countmonths++;
+					}
+					else {
+						day =countdays;
+						countdays =0;
+					}
+				}
+				
+				else if(countmonths==4 || countmonths==6 || countmonths==9 || countmonths==12) {
+					if(countdays>30) {
+						countdays -=30;
+						countmonths++;
+					}
+					else {
+						day =countdays;
+						countdays=0;
+					}	
+				}
+				
+				else if(countmonths ==2) {
+					if(countdays>29) {
+						countdays -=29;	
+						countmonths ++;
+					}
+					else {
+						day = countdays;
+						countdays = 0;
+					}
+				}
+				
+				else if(countmonths ==12) {
+					if(countdays>31) {
+						countdays -=31;	
+						countmonths ++;
+						countyear++;
+					}
+					else {
+						day = countdays;
+						countdays = 0;
+					}
+				}
+			}
+		}
+		month = countmonths;
+		year = countyear; 
+	}
+}
