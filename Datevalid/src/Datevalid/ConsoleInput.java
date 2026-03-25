@@ -1,25 +1,77 @@
 package Datevalid;
 
-
 public class ConsoleInput {
-	public static int getInt() {
-		try{
-			byte[] input = new byte[100];
-			int len=System.in.read(input);
-			byte[] finalInput=new byte[len-2];
-			
-			System.arraycopy(input, 0, finalInput, 0, len-2);
-			
-			String objString1=new String(finalInput);
-			//System.out.println("Input is "+objString1);
-			int num1=Integer.parseInt(objString1);
-			return num1;
-		}
-		catch(Exception e) {
-			System.out.println("Error Occured !!!!");
-			e.printStackTrace();
-		}
-		return -1;
-	}
-}
 
+    // Read raw input as String
+    public static String getString() {
+        try {
+            byte[] input = new byte[100];
+            int len = System.in.read(input);
+
+            // remove newline (\n or \r\n)
+            int actualLen = len;
+            if (len > 0 && (input[len - 1] == '\n')) actualLen--;
+            if (len > 1 && (input[len - 2] == '\r')) actualLen--;
+
+            return new String(input, 0, actualLen);
+        } catch (Exception e) {
+            System.out.println("Error reading String!");
+            return null;
+        }
+    }
+
+    // Integer input
+    public static int getInt() {
+        try {
+            String str = getString();
+            return Integer.parseInt(str.trim());
+        } catch (Exception e) {
+            System.out.println("Invalid Integer!");
+            return -1;
+        }
+    }
+
+    // Float input
+    public static float getFloat() {
+        try {
+            String str = getString();
+            return Float.parseFloat(str.trim());
+        } catch (Exception e) {
+            System.out.println("Invalid Float!");
+            return -1;
+        }
+    }
+
+    // Double input
+    public static double getDouble() {
+        try {
+            String str = getString();
+            return Double.parseDouble(str.trim());
+        } catch (Exception e) {
+            System.out.println("Invalid Double!");
+            return -1;
+        }
+    }
+
+    // Character input
+    public static char getChar() {
+        try {
+            String str = getString();
+            return str.charAt(0);
+        } catch (Exception e) {
+            System.out.println("Invalid Character!");
+            return '\0';
+        }
+    }
+
+    // Byte input (numeric)
+    public static byte getByte() {
+        try {
+            String str = getString();
+            return Byte.parseByte(str.trim());
+        } catch (Exception e) {
+            System.out.println("Invalid Byte!");
+            return -1;
+        }
+    }
+}
